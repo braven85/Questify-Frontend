@@ -3,12 +3,8 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./routes/PrivateRoute";
 
-
-const HomePage = lazy(() => import('./pages/HomePage'));
+const HomePage = lazy(() => import("./pages/HomePage"));
 const UserPage = lazy(() => import("./pages/UserPage"));
-
-
-
 
 const App = () => {
   return (
@@ -33,7 +29,6 @@ const App = () => {
         />
       </Routes>
     </Suspense>
-
   );
 };
 

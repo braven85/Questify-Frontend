@@ -1,4 +1,3 @@
-
 import styles from "./Landing.module.css";
 import React, { useEffect, useState } from "react";
 
@@ -11,12 +10,11 @@ import SVGTH2 from "../../assets/landingImages/tablet/horizontal/TabletHorizonta
 import SVGD1 from "../../assets/landingImages/desktop/Desktop1.svg";
 import SVGD2 from "../../assets/landingImages/desktop/Desktop2.svg";
 
-
-function Background(props) {
+const Background = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   let image1 = SVGM1;
   let image2 = SVGM2;
-  if (windowWidth >= 768 && windowWidth<1020) {
+  if (windowWidth >= 768 && windowWidth < 1020) {
     image1 = SVGTV1;
     image2 = SVGTV2;
   } else if (windowWidth >= 1020 && windowWidth < 1199) {
@@ -45,6 +43,6 @@ function Background(props) {
       <img src={`${image2}`} alt="line" className={styles.landingBgImage2} />
     </div>
   );
-}
+};
 
 export default Background;

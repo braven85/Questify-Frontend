@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import styles from "./Challange.module.css";
 import { ModalLevel } from "../ModalLevel/ModalLevel";
 import { ModalActivity } from "../ModalActivity/ModalActivity";
@@ -111,7 +111,9 @@ const Challange = ({
   const [dateForBackend, setDateForBackend] = useState("");
 
   const timeAndDateFromCard = `${cardDate} ${cardTime}:00`;
-  const timeForFront = new Date(timeAndDateFromCard);
+  const timeForFront = useMemo(() => {
+    return new Date(timeAndDateFromCard);
+  }, [timeAndDateFromCard]);
 
   const handlerTimerToggle = () => {
     setModalTimerToggle(!modalTimerToggle);
@@ -139,7 +141,6 @@ const Challange = ({
       e.target.nodeName !== "BUTTON"
     ) {
       setUpdateMode(true);
-    } else {
     }
   };
 
@@ -150,35 +151,36 @@ const Challange = ({
     handlerChangeCalendar([timeForFront]);
   };
 
-  const handlerEndUpdate = (e) => {
+  const handlerEndUpdate = () => {
     setDefaultCardData();
     setUpdateMode(false);
   };
 
-  const handlerIsTomorrow = () => {
-    const check = calendar.split(",").includes("Tomorrow");
-  };
-
-  useEffect(() => {
-    if (calendar === "Today") {
-      return;
-    }
-    handlerIsTomorrow();
+  const handlerIsTomorrow = useCallback(() => {
+    calendar.split(",").includes("Tomorrow");
   }, [calendar]);
 
   useEffect(() => {
     if (calendar === "Today") {
       return;
     }
+    handlerIsTomorrow();
+  }, [calendar, handlerIsTomorrow]);
+
+  useEffect(() => {
+    if (calendar === "Today") {
+      return;
+    }
     handlerChangeCalendar([updatedTime]);
-  });
+  }, [calendar, updatedTime]);
+
+  const isEditCardFulfilled = isCardLoading === "editCard/fulfilled";
+  const isUpdateCardStatusFulfilled =
+    isCardLoading === "updateCardStatus/fulfilled";
 
   useEffect(() => {
     dispatch(getAllCards(accessToken));
-  }, [
-    isCardLoading === "editCard/fulfilled",
-    isCardLoading === "updateCardStatus/fulfilled",
-  ]);
+  }, [isEditCardFulfilled, isUpdateCardStatusFulfilled, accessToken, dispatch]);
 
   const handlerLevelToggle = () => {
     setLevelToggle(!levelToggle);
@@ -252,7 +254,7 @@ const Challange = ({
 
   useEffect(() => {
     handlerChangeCalendar([timeForFront]);
-  }, []);
+  }, [timeForFront]);
 
   const handlerChangeActivity = (e) => {
     setActivity(e.target.value);

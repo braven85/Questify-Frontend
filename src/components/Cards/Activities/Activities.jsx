@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Activities.module.css";
 import { ButtonsMain } from "../ButtonsMain/ButtonsMain";
 

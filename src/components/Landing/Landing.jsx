@@ -4,7 +4,7 @@ import LandingForm from "./LandingForm";
 import Background from "./Background";
 import styles from "./Landing.module.css";
 
-function Landing() {
+const Landing = () => {
   useEffect(() => {
     document.body.style.backgroundColor = "white";
   }, []);
@@ -18,6 +18,6 @@ function Landing() {
       <Background></Background>
     </div>
   );
-}
+};
 
 export default Landing;

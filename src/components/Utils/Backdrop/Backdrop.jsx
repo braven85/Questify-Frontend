@@ -16,7 +16,8 @@ const Backdrop = ({ children, toggle }) => {
           exit={{
             opacity: 0,
           }}
-          className={styles.backdrop}>
+          className={styles.backdrop}
+        >
           {children}
         </motion.div>
       ) : null}

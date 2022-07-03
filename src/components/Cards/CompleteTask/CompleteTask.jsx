@@ -7,7 +7,7 @@ import { ReactComponent as Clouds } from "../../../assets/completeTask/clouds.sv
 import { ReactComponent as Trophy } from "../../../assets/completeTask/trophy.svg";
 import { Animated } from "react-animated-css";
 
-function CompleteTask({ type, title, onClick }) {
+const CompleteTask = ({ type, title, onClick }) => {
   return (
     <div className={styles.completeWrap}>
       <div className={styles.complete}>
@@ -66,6 +66,6 @@ function CompleteTask({ type, title, onClick }) {
       </div>
     </div>
   );
-}
+};
 
 export default CompleteTask;

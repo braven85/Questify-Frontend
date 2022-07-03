@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./CardQuest.module.css";
 import { ModalLevel } from "./ModalLevel/ModalLevel";
 import { ModalActivity } from "./ModalActivity/ModalActivity";
@@ -91,7 +91,9 @@ const CardQuest = ({
   const [dateForBackend, setDateForBackend] = useState("");
 
   const timeAndDateFromCard = `${cardDate} ${cardTime}:00`;
-  const timeForFront = new Date(timeAndDateFromCard);
+  const timeForFront = useMemo(() => {
+    return new Date(timeAndDateFromCard);
+  }, [timeAndDateFromCard]);
 
   const handlerTimerToggle = () => {
     setModalTimerToggle(!modalTimerToggle);
@@ -119,7 +121,6 @@ const CardQuest = ({
       e.target.nodeName !== "BUTTON"
     ) {
       setUpdateMode(true);
-    } else {
     }
   };
 
@@ -130,7 +131,7 @@ const CardQuest = ({
     handlerChangeCalendar([timeForFront]);
   };
 
-  const handlerEndUpdate = (e) => {
+  const handlerEndUpdate = () => {
     setDefaultCardData();
     setUpdateMode(false);
   };
@@ -140,14 +141,15 @@ const CardQuest = ({
       return;
     }
     handlerChangeCalendar([updatedTime]);
-  });
+  }, [calendar, updatedTime]);
+
+  const isEditCardFulfilled = isCardLoading === "editCard/fulfilled";
+  const isUpdateCardStatusFulfilled =
+    isCardLoading === "updateCardStatus/fulfilled";
 
   useEffect(() => {
     dispatch(getAllCards(accessToken));
-  }, [
-    isCardLoading === "editCard/fulfilled",
-    isCardLoading === "updateCardStatus/fulfilled",
-  ]);
+  }, [isEditCardFulfilled, isUpdateCardStatusFulfilled, accessToken, dispatch]);
 
   const handlerLevelToggle = () => {
     setLevelToggle(!levelToggle);
@@ -221,7 +223,7 @@ const CardQuest = ({
 
   useEffect(() => {
     handlerChangeCalendar([timeForFront]);
-  }, []);
+  }, [timeForFront]);
 
   const handlerChangeActivity = (e) => {
     setActivity(e.target.value);

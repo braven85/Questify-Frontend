@@ -1,8 +1,7 @@
 import styles from "./Landing.module.css";
 import React from "react";
 
-function LandingInfo() {
-
+const LandingInfo = () => {
   return (
     <div className={styles.info}>
       <h1 className={styles.landingHeader}>Questify</h1>
@@ -12,6 +11,6 @@ function LandingInfo() {
       </p>
     </div>
   );
-}
+};
 
 export default LandingInfo;

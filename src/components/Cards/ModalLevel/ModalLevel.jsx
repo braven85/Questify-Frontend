@@ -20,14 +20,16 @@ const ModalLevel = ({ onClick, onMouseLeave, levelToggle }) => {
             opacity: 0,
             top: 0,
           }}
-          className={styles.modal}>
+          className={styles.modal}
+        >
           <div className={styles.select}>
             <div className={styles.modal_circle_blue}></div>
             <button
               type="button"
               value="Easy"
               className={styles.modal_button}
-              onClick={onClick}>
+              onClick={onClick}
+            >
               Easy
             </button>
           </div>
@@ -37,7 +39,8 @@ const ModalLevel = ({ onClick, onMouseLeave, levelToggle }) => {
               type="button"
               value="Normal"
               className={styles.modal_button}
-              onClick={onClick}>
+              onClick={onClick}
+            >
               Normal
             </button>
           </div>
@@ -47,7 +50,8 @@ const ModalLevel = ({ onClick, onMouseLeave, levelToggle }) => {
               type="button"
               value="Hard"
               className={styles.modal_button}
-              onClick={onClick}>
+              onClick={onClick}
+            >
               Hard
             </button>
           </div>

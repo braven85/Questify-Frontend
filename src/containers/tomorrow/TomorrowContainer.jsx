@@ -40,7 +40,6 @@ const TomorrowContainer = () => {
     }
   }
 
-  
   const sortedCards = () => {
     sortedByDate = tomorrowCards.sort(function (a, b) {
       return (

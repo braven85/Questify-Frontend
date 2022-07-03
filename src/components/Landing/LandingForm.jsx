@@ -1,12 +1,11 @@
 import styles from "./Landing.module.css";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { getAllUsers, loginUser, registerUser } from "../../services/api";
-import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Notiflix from "notiflix";
 
-function LandingForm() {
+const LandingForm = () => {
   Notiflix.Notify.init({ timeout: 6000 });
   const dispatch = useDispatch();
   const emailInputRef = useRef();
@@ -22,7 +21,7 @@ function LandingForm() {
     if (error) {
       Notiflix.Notify.failure(error);
     }
-  }, [error]);
+  }, [error, dispatch]);
 
   useEffect(() => {
     if (accessToken) {
@@ -33,7 +32,6 @@ function LandingForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = e.target;
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
@@ -90,6 +88,6 @@ function LandingForm() {
       </form>
     </div>
   );
-}
+};
 
 export default LandingForm;
