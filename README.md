@@ -1,4 +1,6 @@
-# Questify your life
+# Questify your life - frontend
+
+You can try this app at https://questify-frontend.netlify.app
 
 ## Available Scripts
 
